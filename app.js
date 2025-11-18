@@ -13,7 +13,17 @@ app.get('/', (req, res) => {
   res.send(createHomepageTemplate());
 });
 
+
+app.get('/books', (req, res) => {
+  const greetings = ['hi', 'ho', 'hello', 'hey'];
+  const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+  res.send(`<p>${randomGreeting}.</p>`);
+});
+
+
 // listen to port
+
+
 app.listen(3000, () => {
   console.log('App listening on port 3000');
 });
