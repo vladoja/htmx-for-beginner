@@ -1,6 +1,7 @@
 import express from 'express';
 import createHomepageTemplate from './views/index.js';
 import createListTemplate from './views/list.js';
+import BOOKS_DATA from './data/data.js';
 
 // create app
 const app = express();
@@ -16,6 +17,14 @@ app.get('/', (req, res) => {
 
 
 app.get('/books', (req, res) => {
+  res.send(createListTemplate());
+});
+
+
+app.post('/books', (req, res) => {
+  const { title, author } = req.body;
+  const newBook = { title, author };
+  BOOKS_DATA.push(newBook);
   res.send(createListTemplate());
 });
 

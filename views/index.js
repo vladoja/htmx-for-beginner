@@ -22,6 +22,12 @@ const createHomepageTemplate = () => /*html*/ `
         <div class="add-book-form">
           <h2>What do you want to read?</h2>
           <!-- form template here later -->
+           <form>
+            <input type="text" name="title" placeholder="Book title" required>
+            <input type="text" name="author" placeholder="Author" required>
+            <!-- xht-post gather form data and send to /books endpoint -->
+            <button type="submit" hx-post="/books" hx-swap="outerHTML" hx-target=".book-list ul">Add Book</button>
+          </form>
         </div>
       </main>
     </body>
