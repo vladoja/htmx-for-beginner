@@ -1,6 +1,7 @@
 import express from 'express';
 import createHomepageTemplate from './views/index.js';
 import createListTemplate from './views/list.js';
+import createBookTemplate from './views/book.js';
 import BOOKS_DATA from './data/data.js';
 
 
@@ -31,7 +32,8 @@ app.post('/books', (req, res) => {
   newBook.id = String(maxId);
   console.log('Assigned ID to new book:', newBook.id);
   BOOKS_DATA.push(newBook);
-  res.send(createListTemplate());
+  // res.send(createListTemplate());
+  res.send(createBookTemplate(newBook));
 });
 
 
