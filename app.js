@@ -1,5 +1,6 @@
 import express from 'express';
 import createHomepageTemplate from './views/index.js';
+import createListTemplate from './views/list.js';
 
 // create app
 const app = express();
@@ -15,9 +16,7 @@ app.get('/', (req, res) => {
 
 
 app.get('/books', (req, res) => {
-  const greetings = ['hi', 'ho', 'hello', 'hey'];
-  const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
-  res.send(`<p>${randomGreeting}.</p>`);
+  res.send(createListTemplate());
 });
 
 
