@@ -22,16 +22,16 @@ const createHomepageTemplate = () => /*html*/ `
         <div class="add-book-form">
           <h2>What do you want to read?</h2>
           <!-- form template here later -->
-           <form>
+           <form 
+            hx-post="/books"
+            hx-on::after-request="document.querySelector('form').reset()"
+            hx-target=".book-list ul" 
+            hx-swap="beforeend"
+           >
             <input type="text" name="title" placeholder="Book title" required>
             <input type="text" name="author" placeholder="Author" required>
             <!-- xht-post gather form data and send to /books endpoint -->
-            <button type="submit" 
-              hx-on::after-request="document.querySelector('form').reset()" 
-              hx-on:click="console.log('new book added', event)" 
-              hx-post="/books"
-              hx-swap="beforeend"
-              hx-target=".book-list ul">Add Book</button>
+            <button>Add Book</button>
           </form>
         </div>
       </main>
