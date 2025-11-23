@@ -33,7 +33,17 @@ app.post('/books', (req, res) => {
   console.log('Assigned ID to new book:', newBook.id);
   BOOKS_DATA.push(newBook);
   // res.send(createListTemplate());
-  res.send(createBookTemplate(newBook));
+  res.redirect(`/books/${newBook.id}`);
+});
+
+app.get('/books/:id', (req, res) => {
+  const { id } = req.params;
+  const book = BOOKS_DATA.find((b) => b.id === id);
+  if (book) {
+    res.send(createBookTemplate(book));
+  } else {
+    res.status(404).send('Book not found');
+  }
 });
 
 
