@@ -2,6 +2,7 @@ import express from 'express';
 import createHomepageTemplate from './views/index.js';
 import createListTemplate from './views/list.js';
 import createBookTemplate from './views/book.js';
+import createEditFormTemplate from './views/edit.js';
 import BOOKS_DATA from './data/data.js';
 
 
@@ -34,6 +35,17 @@ app.post('/books', (req, res) => {
   BOOKS_DATA.push(newBook);
   // res.send(createListTemplate());
   res.redirect(`/books/${newBook.id}`);
+});
+
+
+app.get('/books/edit/:id', (req, res) => {
+  const { id } = req.params;
+  const book = BOOKS_DATA.find((b) => b.id === id);
+  if (!book) {
+    res.status(404).send('Book not found');
+    return;
+  }
+  res.send(createEditFormTemplate(book));
 });
 
 app.get('/books/:id', (req, res) => {
