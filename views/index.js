@@ -26,7 +26,12 @@ const createHomepageTemplate = () => /*html*/ `
             <input type="text" name="title" placeholder="Book title" required>
             <input type="text" name="author" placeholder="Author" required>
             <!-- xht-post gather form data and send to /books endpoint -->
-            <button type="submit" hx-post="/books" hx-swap="beforeend" hx-target=".book-list ul">Add Book</button>
+            <button type="submit" 
+              hx-on::after-request="document.querySelector('form').reset()" 
+              hx-on:click="console.log('new book added', event)" 
+              hx-post="/books"
+              hx-swap="beforeend"
+              hx-target=".book-list ul">Add Book</button>
           </form>
         </div>
       </main>
