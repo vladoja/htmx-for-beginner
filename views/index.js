@@ -14,6 +14,18 @@ const createHomepageTemplate = () => /*html*/ `
       </header>
 
       <main>
+        <div class="search" style="text-align: center; margin-bottom: 20px;">
+          <input 
+            type="search"
+            name="search"
+            placeholder="Search books..."
+            hx-post="/books/search"
+            hx-trigger="keyup changed delay:500ms"
+            hx-target=".book-list"
+            hx-swap="innerHTML"
+            >
+
+        </div>
         <div class="book-list">
           <!-- book list here later -->
            <button hx-get="/books" hx-swap="beforeend" hx-target=".book-list">Show books</button>

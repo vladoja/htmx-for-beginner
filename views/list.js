@@ -4,9 +4,9 @@ import BOOKS_DATA from "../data/data.js";
 import createBookTemplate from "./book.js";
 
 // console.log(BOOKS_DATA);
-const createListTemplate = () => /*html*/`
+const createListTemplate = (books) => /*html*/`
 <ul>
-    ${BOOKS_DATA.map((book) =>
+    ${books.map((book) =>
     createBookTemplate(book)).join('')}
 </ul >
     `;

@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 
 
 app.get('/books', (req, res) => {
-  res.send(createListTemplate());
+  res.send(createListTemplate(BOOKS_DATA));
 });
 
 
@@ -33,7 +33,6 @@ app.post('/books', (req, res) => {
   newBook.id = String(maxId);
   console.log('Assigned ID to new book:', newBook.id);
   BOOKS_DATA.push(newBook);
-  // res.send(createListTemplate());
   res.redirect(`/books/${newBook.id}`);
 });
 
@@ -81,6 +80,22 @@ app.delete('/books/:id', (req, res) => {
     BOOKS_DATA.splice(idx, 1);
   }
   res.send();
+});
+
+
+app.post('/books/search', (req, res) => {
+  // const { search } = req.body;
+  const search = req.body.search || '';
+  const filteredBooks = BOOKS_DATA.filter((book) => {
+    const searchLower = search.toLowerCase();
+    return (
+      book.title.toLowerCase().includes(searchLower) ||
+      book.author.toLowerCase().includes(searchLower)
+    );
+  });
+  console.log('Search query:', search);
+  console.log('Filtered books:', filteredBooks);
+  res.send(createListTemplate(filteredBooks));
 });
 
 
