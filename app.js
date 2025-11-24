@@ -48,6 +48,22 @@ app.get('/books/edit/:id', (req, res) => {
   res.send(createEditFormTemplate(book));
 });
 
+
+app.put('/books/:id', (req, res) => {
+  const { id } = req.params;
+  const { title, author } = req.body;
+  const book = BOOKS_DATA.find((b) => b.id === id);
+  if (book) {
+    book.title = title;
+    book.author = author;
+
+    console.log('Updated book:', book);
+    res.send(createBookTemplate(book));
+  } else {
+    res.status(404).send('Book not found');
+  }
+});
+
 app.get('/books/:id', (req, res) => {
   const { id } = req.params;
   const book = BOOKS_DATA.find((b) => b.id === id);

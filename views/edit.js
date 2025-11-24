@@ -2,8 +2,8 @@ const createEditFormTemplate = (book) => /*html*/ `
            <form 
             hx-put="/books/${book.id}"
             hx-on::after-request="document.querySelector('form').reset()"
-            hx-target=".book-list ul" 
-            hx-swap="beforeend"
+            hx-target=".book-list li[data-id='${book.id}']" 
+            hx-swap="outerHTML"
            >
             <input type="text" name="title" placeholder="Book title" value="${book.title}" required>
             <input type="text" name="author" placeholder="Author" value="${book.author}" required>
